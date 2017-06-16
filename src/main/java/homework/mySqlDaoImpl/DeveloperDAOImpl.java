@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class DeveloperDAOImpl implements DeveloperDAO<Developer> {
+public class DeveloperDAOImpl implements DeveloperDAO<Integer, Developer> {
 
 
     private String URL = "jdbc:mysql://127.0.0.1:3306/ivan_homework" +
@@ -42,13 +42,13 @@ public class DeveloperDAOImpl implements DeveloperDAO<Developer> {
             preparedStatement.execute();
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
         }
         
     }
 
     @Override
-    public Developer read(int id) {
+    public Developer read(Integer id) {
 
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM developers WHERE id = ?")) {
@@ -70,9 +70,10 @@ public class DeveloperDAOImpl implements DeveloperDAO<Developer> {
             }
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+
         }
-        return null;
+
     }
 
     @Override
@@ -98,13 +99,14 @@ public class DeveloperDAOImpl implements DeveloperDAO<Developer> {
             }
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+
         }
-        return null;
+
     }
 
     @Override
-    public void update(int id, Developer developer) {
+    public void update(Integer id, Developer developer) {
 
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("UPDATE developers SET name = ?, surname = ?, company_id = ?, salary = ? WHERE id = ?")) {
@@ -114,16 +116,17 @@ public class DeveloperDAOImpl implements DeveloperDAO<Developer> {
             preparedStatement.setInt(3, developer.getCompanyId());
             preparedStatement.setInt(4, developer.getSalary());
             preparedStatement.setInt(5, id);
-            preparedStatement.execute();
+            preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+
         }
         
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(Integer id) {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM developers WHERE id = ?")) {
 
@@ -131,7 +134,8 @@ public class DeveloperDAOImpl implements DeveloperDAO<Developer> {
             preparedStatement.execute();
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+
         }
     }
 }

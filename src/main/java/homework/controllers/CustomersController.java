@@ -8,7 +8,8 @@ import static homework.model.Utils.*;
 
 public class CustomersController {
 
-    private CustomerDAO<Customer> customerDAO = new CustomerDAOImpl();
+    private CustomerDAO<Integer, Customer> customerDAO = new CustomerDAOImpl();
+
 
     public void showMenu() {
 
@@ -104,11 +105,11 @@ public class CustomersController {
         if (customer == null)
             return;
 
-        String customerName = provideStringInputStream("Enter customer name or press 'enter' to return to menu: ");
+        String customerName = provideStringInputStream("Enter customer name or press 'enter': ");
         if (isValidString(customerName))
             customer.setName(customerName);
 
-        String customerCity = provideStringInputStream("Enter customer city or press 'enter' to return to menu: ");
+        String customerCity = provideStringInputStream("Enter customer city or press 'enter': ");
         if (isValidString(customerCity))
             customer.setCity(customerCity);
 

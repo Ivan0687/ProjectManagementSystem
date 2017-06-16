@@ -1,14 +1,18 @@
 package homework.controllers;
 
 import homework.model.dao.DeveloperDAO;
+import homework.model.dao.SkillDAO;
 import homework.model.entities.Developer;
+import homework.model.entities.Skill;
 import homework.mySqlDaoImpl.DeveloperDAOImpl;
+import homework.mySqlDaoImpl.SkillDAOImpl;
 
 import static homework.model.Utils.*;
 
 public class DevelopersController {
 
-    private DeveloperDAO<Developer> developerDAO = new DeveloperDAOImpl();
+    private DeveloperDAO<Integer, Developer> developerDAO = new DeveloperDAOImpl();
+    private SkillDAO<Integer, Skill> skillDAO = new SkillDAOImpl();
 
     public void showMenu() {
 
@@ -69,10 +73,12 @@ public class DevelopersController {
         Integer companyId = provideIntInputStreamWithMessage("Enter company id or press 'enter' to return to menu: ");
         if (companyId != null)
             developer.setCompanyId(companyId);
+        else return;
 
         Integer salary = provideIntInputStreamWithMessage("Enter salary or press 'enter' to return to menu: ");
         if (salary != null)
             developer.setSalary(salary);
+        else return;
 
         developerDAO.create(developer);
     }
@@ -112,25 +118,33 @@ public class DevelopersController {
         if (developer == null)
             return;
 
-        String developerName = provideStringInputStream("Enter new developer name or press 'enter' to return to menu: ");
+        String developerName = provideStringInputStream("Enter new developer name or press 'enter': ");
         if (isValidString(developerName))
             developer.setName(developerName);
         else return;
 
-        String developerSurname = provideStringInputStream("Enter new developer surname or press 'enter' to return to menu: ");
+        String developerSurname = provideStringInputStream("Enter new developer surname or press 'enter': ");
         if (isValidString(developerSurname))
             developer.setSurname(developerSurname);
         else return;
 
-        Integer companyId = provideIntInputStreamWithMessage("Enter new company id or press 'enter' to return to menu: ");
+        Integer companyId = provideIntInputStreamWithMessage("Enter new company id or press 'enter': ");
         if (companyId != null)
             developer.setCompanyId(companyId);
 
-        Integer salary = provideIntInputStreamWithMessage("Enter new salary or press 'enter' to return to menu: ");
+        Integer salary = provideIntInputStreamWithMessage("Enter new salary or press 'enter': ");
         if (salary != null)
             developer.setSalary(salary);
 
+        updateDeveloperSkills(developer);
+
         developerDAO.update(developerId, developer);
+    }
+
+    private void updateDeveloperSkills(Developer developer) {
+
+
+
     }
 
     private void deleteDeveloper() {

@@ -9,7 +9,7 @@ import static homework.model.Utils.provideIntInputStreamWithMessage;
 
 public class ProjectsController {
 
-    private ProjectDAO<Project> projectDAO = new ProjectDAOImpl();
+    private ProjectDAO<Integer, Project> projectDAO = new ProjectDAOImpl();
 
     public void showMenu() {
 
@@ -70,10 +70,12 @@ public class ProjectsController {
         Integer customerId = provideIntInputStreamWithMessage("Enter customer id or press 'enter' to return to menu: ");
         if (customerId != null)
             project.setCustomerId(customerId);
+        else return;
 
         Integer cost = provideIntInputStreamWithMessage("Enter cost or press 'enter' to return to menu: ");
         if (cost != null)
             project.setCost(cost);
+        else return;
 
         projectDAO.create(project);
     }
@@ -113,21 +115,21 @@ public class ProjectsController {
         if (project == null)
             return;
 
-        String developerName = provideStringInputStream("Enter new project name or press 'enter' to return to menu: ");
+        String developerName = provideStringInputStream("Enter new project name or press 'enter': ");
         if (isValidString(developerName))
             project.setName(developerName);
         else return;
 
-        String developerSurname = provideStringInputStream("Enter new project surname or press 'enter' to return to menu: ");
+        String developerSurname = provideStringInputStream("Enter new project surname or press 'enter': ");
         if (isValidString(developerSurname))
             project.setDescription(developerSurname);
         else return;
 
-        Integer customerId = provideIntInputStreamWithMessage("Enter new customer id or press 'enter' to return to menu: ");
+        Integer customerId = provideIntInputStreamWithMessage("Enter new customer id or press 'enter': ");
         if (customerId != null)
             project.setCustomerId(customerId);
 
-        Integer cost = provideIntInputStreamWithMessage("Enter new cost or press 'enter' to return to menu: ");
+        Integer cost = provideIntInputStreamWithMessage("Enter new cost or press 'enter': ");
         if (cost != null)
             project.setCost(cost);
 

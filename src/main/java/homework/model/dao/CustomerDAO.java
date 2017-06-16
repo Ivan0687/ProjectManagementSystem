@@ -1,6 +1,11 @@
 package homework.model.dao;
 
 import homework.model.entities.Customer;
+import homework.model.entities.Project;
 
-public interface CustomerDAO<T extends Customer> extends DAO<T>{
+import java.util.Collection;
+
+public interface CustomerDAO<K extends Number, T extends Customer> extends DAO<K, T>{
+
+
 }

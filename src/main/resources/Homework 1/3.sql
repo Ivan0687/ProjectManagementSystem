@@ -13,4 +13,4 @@ WHERE
             skill_id in (SELECT 
                     id
                 FROM
-                    ivan_homework.skills where name = 'java'));
+                    ivan_homework.skillIds where name = 'java'));

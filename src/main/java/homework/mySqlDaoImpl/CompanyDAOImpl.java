@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class CompanyDAOImpl implements CompanyDAO<Company> {
+public class CompanyDAOImpl implements CompanyDAO<Integer, Company> {
 
     private String URL = "jdbc:mysql://127.0.0.1:3306/ivan_homework" +
             "?useUnicode=true&useSSL=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
@@ -39,12 +39,12 @@ public class CompanyDAOImpl implements CompanyDAO<Company> {
             preparedStatement.execute();
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
     @Override
-    public Company read(int id) {
+    public Company read(Integer id) {
 
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM companies WHERE id = ?")) {
@@ -52,7 +52,6 @@ public class CompanyDAOImpl implements CompanyDAO<Company> {
             preparedStatement.setInt(1, id);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-
                 Company company = new Company();
                 if (resultSet.next()) {
                     company.setId(resultSet.getInt("id"));
@@ -62,12 +61,9 @@ public class CompanyDAOImpl implements CompanyDAO<Company> {
                 } else
                     return null;
             }
-
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
         }
-        
-        return null;
     }
 
     @Override
@@ -89,15 +85,13 @@ public class CompanyDAOImpl implements CompanyDAO<Company> {
                 }
                 return companies;
             }
-
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
         }
-        return null;
     }
 
     @Override
-    public void update(int id, Company company) {
+    public void update(Integer id, Company company) {
 
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("UPDATE companies SET name = ?, city = ? WHERE id = ?")) {
@@ -105,16 +99,15 @@ public class CompanyDAOImpl implements CompanyDAO<Company> {
             preparedStatement.setString(1, company.getName());
             preparedStatement.setString(2, company.getCity());
             preparedStatement.setInt(3, id);
-            preparedStatement.execute();
+            preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
         }
-        
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(Integer id) {
         
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM companies WHERE id = ?")) {
@@ -123,8 +116,7 @@ public class CompanyDAOImpl implements CompanyDAO<Company> {
             preparedStatement.execute();
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
         }
     }
-    
 }

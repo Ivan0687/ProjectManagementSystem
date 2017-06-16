@@ -8,7 +8,7 @@ import static homework.model.Utils.*;
 
 public class SkillsController {
 
-    private SkillDAO<Skill> skillDAO = new SkillDAOImpl();
+    private SkillDAO<Integer, Skill> skillDAO = new SkillDAOImpl();
 
     public void showMenu() {
 
@@ -113,15 +113,15 @@ public class SkillsController {
         if (skill == null)
             return;
 
-        String skillName = provideStringInputStream("Enter new skill name or press 'enter' to return to menu: ");
+        String skillName = provideStringInputStream("Enter new skill name or press 'enter': ");
         if (isValidString(skillName))
             skill.setName(skillName);
 
-        String skillLevel = provideStringInputStream("Enter new skill level or press 'enter' to return to menu: ");
+        String skillLevel = provideStringInputStream("Enter new skill level or press 'enter': ");
         if (isValidString(skillLevel))
             skill.setLevel(skillLevel);
 
-        Integer tax = provideIntInputStreamWithMessage("Enter new skill tax or press 'enter' to return to menu: ");
+        Integer tax = provideIntInputStreamWithMessage("Enter new skill tax or press 'enter': ");
         if (tax != null)
             skill.setTax(tax);
 

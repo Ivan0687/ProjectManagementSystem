@@ -1,9 +1,9 @@
 # 4. Добавить поле (cost - стоимость) в таблицу Projects .
 
-ALTER TABLE `ivan_homework`.`projects` 
+ALTER TABLE `ivan_homework`.`projectIds`
 ADD COLUMN `cost` INT NULL AFTER `customer_id`;
 
-UPDATE `ivan_homework`.`projects` 
+UPDATE `ivan_homework`.`projectIds`
 SET 
     cost = (SELECT 
             SUM(salary)
@@ -16,5 +16,5 @@ SET
                     ivan_homework.project_developers
 				WHERE
                     project_id =  
-                            ivan_homework.projects.id));
+                            ivan_homework.projectIds.id));
                             

@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class SkillDAOImpl implements SkillDAO<Skill> {
+public class SkillDAOImpl implements SkillDAO<Integer, Skill> {
 
     private String URL = "jdbc:mysql://127.0.0.1:3306/ivan_homework" +
             "?useUnicode=true&useSSL=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
@@ -40,12 +40,13 @@ public class SkillDAOImpl implements SkillDAO<Skill> {
             preparedStatement.execute();
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+
         }
     }
 
     @Override
-    public Skill read(int id) {
+    public Skill read(Integer id) {
 
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM SKILLS WHERE id = ?")) {
@@ -66,9 +67,10 @@ public class SkillDAOImpl implements SkillDAO<Skill> {
             }
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+
         }
-        return null;
+
     }
 
     @Override
@@ -93,13 +95,14 @@ public class SkillDAOImpl implements SkillDAO<Skill> {
             }
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+
         }
-        return null;
+
     }
 
     @Override
-    public void update(int id, Skill skill) {
+    public void update(Integer id, Skill skill) {
 
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("UPDATE skills SET name = ?, level = ?, tax = ? WHERE id = ?")) {
@@ -108,15 +111,16 @@ public class SkillDAOImpl implements SkillDAO<Skill> {
             preparedStatement.setString(2, skill.getLevel());
             preparedStatement.setInt(3, skill.getTax());
             preparedStatement.setInt(4, id);
-            preparedStatement.execute();
+            preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+
         }
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(Integer id) {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM SKILLS WHERE id = ?")) {
 
@@ -124,7 +128,8 @@ public class SkillDAOImpl implements SkillDAO<Skill> {
             preparedStatement.execute();
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+
         }
     }
 }

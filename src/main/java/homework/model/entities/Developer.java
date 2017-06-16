@@ -1,5 +1,7 @@
 package homework.model.entities;
 
+import java.util.List;
+
 public class Developer {
 
     private int id;
@@ -7,6 +9,8 @@ public class Developer {
     private String surname;
     private int companyId;
     private int salary;
+    List<Integer> skillIds;
+    List<Integer> projectIds;
 
     public int getId() {
         return id;
@@ -48,5 +52,32 @@ public class Developer {
         this.salary = salary;
     }
 
+    public List<Integer> getSkillIds() {
+        return skillIds;
+    }
 
+    public void setSkillIds(List<Integer> skillIds) {
+        this.skillIds = skillIds;
+    }
+
+    public List<Integer> getProjectIds() {
+        return projectIds;
+    }
+
+    public void setProjectIds(List<Integer> projectIds) {
+        this.projectIds = projectIds;
+    }
+
+    @Override
+    public String toString() {
+        return "Developer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", companyId=" + companyId +
+                ", salary=" + salary +
+                ", skillIds count=" + skillIds.size() +
+                ", projectIds count=" + projectIds.size() +
+                '}';
+    }
 }

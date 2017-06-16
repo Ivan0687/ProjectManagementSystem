@@ -2,12 +2,13 @@ package homework.mySqlDaoImpl;
 
 import homework.model.dao.CustomerDAO;
 import homework.model.entities.Customer;
+import homework.model.entities.Project;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class CustomerDAOImpl implements CustomerDAO<Customer> {
+public class CustomerDAOImpl implements CustomerDAO<Integer, Customer> {
 
     private String URL = "jdbc:mysql://127.0.0.1:3306/ivan_homework" +
             "?useUnicode=true&useSSL=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
@@ -39,93 +40,102 @@ public class CustomerDAOImpl implements CustomerDAO<Customer> {
             preparedStatement.execute();
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+
         }
     }
 
     @Override
-    public Customer read(int id) {
+    public Customer read(Integer id) {
 
-        try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM customers WHERE id = ?")) {
+        try (Connection connection = getConnection()) {
+            Customer customer = new Customer();
 
-            preparedStatement.setInt(1, id);
+            try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM customers WHERE id = ?")) {
+                preparedStatement.setInt(1, id);
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        customer.setId(resultSet.getInt("id"));
+                        customer.setName(resultSet.getString("name"));
+                        customer.setCity(resultSet.getString("city"));
 
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-
-                Customer customer = new Customer();
-                if (resultSet.next()) {
-                    customer.setId(resultSet.getInt("id"));
-                    customer.setName(resultSet.getString("name"));
-                    customer.setCity(resultSet.getString("city"));
-
-                    return customer;
-                } else
-                    return null;
+                    } else
+                        return null;
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
-
+            return customer;
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
         }
-
-        return null;
     }
 
     @Override
     public Collection<Customer> read() {
 
-        try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM customers ")) {
+        try (Connection connection = getConnection()) {
+            try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM customers ")) {
 
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
 
-                ArrayList<Customer> customers = new ArrayList<>();
+                    ArrayList<Customer> customers = new ArrayList<>();
 
-                while (resultSet.next()) {
-                    Customer customer = new Customer();
-                    customer.setId(resultSet.getInt("id"));
-                    customer.setName(resultSet.getString("name"));
-                    customer.setCity(resultSet.getString("city"));
-                    customers.add(customer);
+                    while (resultSet.next()) {
+                        Customer customer = new Customer();
+                        customer.setId(resultSet.getInt("id"));
+                        customer.setName(resultSet.getString("name"));
+                        customer.setCity(resultSet.getString("city"));
+
+                        customers.add(customer);
+                    }
+                    return customers;
                 }
-                return customers;
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
-
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
         }
-        return null;
     }
 
     @Override
-    public void update(int id, Customer customer) {
+    public void update(Integer id, Customer customer) {
 
-        try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE customers SET name = ?, city = ? WHERE id = ?")) {
+        try (Connection connection = getConnection()) {
+            try (PreparedStatement preparedStatement = connection.prepareStatement("UPDATE customers SET name = ?, city = ? WHERE id = ?")) {
 
-            preparedStatement.setString(1, customer.getName());
-            preparedStatement.setString(2, customer.getCity());
-            preparedStatement.setInt(3, id);
-            preparedStatement.execute();
+                preparedStatement.setString(1, customer.getName());
+                preparedStatement.setString(2, customer.getCity());
+                preparedStatement.setInt(3, id);
 
+
+                preparedStatement.executeUpdate();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
         }
-
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(Integer id) {
 
-        try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM customers WHERE id = ?")) {
+        try (Connection connection = getConnection()) {
+            try (PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM customers WHERE id = ?")) {
 
-            preparedStatement.setInt(1, id);
-            preparedStatement.execute();
+                preparedStatement.setInt(1, id);
+                preparedStatement.execute();
 
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
         }
     }
+
+
 
 }

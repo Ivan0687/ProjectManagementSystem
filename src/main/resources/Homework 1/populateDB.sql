@@ -66,23 +66,23 @@ INSERT INTO `project_developers` VALUES (1,1),(2,2),(1,3),(1,4),(1,5),(5,5),(1,7
 UNLOCK TABLES;
 
 --
--- Dumping data for table `projects`
+-- Dumping data for table `projectIds`
 --
 
-LOCK TABLES `projects` WRITE;
-/*!40000 ALTER TABLE `projects` DISABLE KEYS */;
-INSERT INTO `projects` VALUES (1,'project','some project',1),(2,'project 1','some project',2),(3,'project 2','some description',3),(4,'project 2','some description',3),(5,'project 3','some description',3),(6,'project 4','some description',6);
-/*!40000 ALTER TABLE `projects` ENABLE KEYS */;
+LOCK TABLES `projectIds` WRITE;
+/*!40000 ALTER TABLE `projectIds` DISABLE KEYS */;
+INSERT INTO `projectIds` VALUES (1,'project','some project',1),(2,'project 1','some project',2),(3,'project 2','some description',3),(4,'project 2','some description',3),(5,'project 3','some description',3),(6,'project 4','some description',6);
+/*!40000 ALTER TABLE `projectIds` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Dumping data for table `skills`
+-- Dumping data for table `skillIds`
 --
 
-LOCK TABLES `skills` WRITE;
-/*!40000 ALTER TABLE `skills` DISABLE KEYS */;
-INSERT INTO `skills` VALUES (1,'java','junior',100),(2,'java','middle',200),(3,'java','senior',300),(4,'c++','junior',100),(5,'c++','middle',200),(6,'c++','senior',300),(7,'c#','junior',100),(8,'c#','middle',200),(9,'c#','senior',300),(10,'sql','junior',100),(11,'sql','middle',200),(12,'sql','senior',300),(13,'http','junior',100),(14,'http','middle',200),(15,'http','senior',300),(16,'javascript','junior',100),(17,'javascript','middle',200),(18,'javascript','senior',300),(19,'php','junior',100),(20,'php','middle',200),(21,'php','senior',300),(22,'perl','junior',100),(23,'perl','middle',200),(24,'perl','senior',300),(25,'python','junior',100),(26,'python','middle',200),(27,'python','senior',300),(28,'ruby','junior',100),(29,'ruby','middle',200),(30,'ruby','senior',300);
-/*!40000 ALTER TABLE `skills` ENABLE KEYS */;
+LOCK TABLES `skillIds` WRITE;
+/*!40000 ALTER TABLE `skillIds` DISABLE KEYS */;
+INSERT INTO `skillIds` VALUES (1,'java','junior',100),(2,'java','middle',200),(3,'java','senior',300),(4,'c++','junior',100),(5,'c++','middle',200),(6,'c++','senior',300),(7,'c#','junior',100),(8,'c#','middle',200),(9,'c#','senior',300),(10,'sql','junior',100),(11,'sql','middle',200),(12,'sql','senior',300),(13,'http','junior',100),(14,'http','middle',200),(15,'http','senior',300),(16,'javascript','junior',100),(17,'javascript','middle',200),(18,'javascript','senior',300),(19,'php','junior',100),(20,'php','middle',200),(21,'php','senior',300),(22,'perl','junior',100),(23,'perl','middle',200),(24,'perl','senior',300),(25,'python','junior',100),(26,'python','middle',200),(27,'python','senior',300),(28,'ruby','junior',100),(29,'ruby','middle',200),(30,'ruby','senior',300);
+/*!40000 ALTER TABLE `skillIds` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

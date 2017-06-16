@@ -9,7 +9,7 @@ import static homework.model.Utils.provideIntInputStreamWithMessage;
 
 public class CompaniesController {
 
-    private CompanyDAO<Company> companyDAO = new CompanyDAOImpl();
+    private CompanyDAO<Integer, Company> companyDAO = new CompanyDAOImpl();
 
     public void showMenu() {
 
@@ -96,7 +96,7 @@ public class CompaniesController {
     }
 
     private void updateCompany() {
-        Integer companyId = provideIntInputStreamWithMessage("Enter company id you want to update or press 'enter' to return to menu: ");
+        Integer companyId = provideIntInputStreamWithMessage("Enter company id you want to update or press 'enter': ");
 
         Company company = null;
         if (companyId != null)
@@ -105,11 +105,11 @@ public class CompaniesController {
         if (company == null)
             return;
 
-        String companyName = provideStringInputStream("Enter new company name or press 'enter' to return to menu: ");
+        String companyName = provideStringInputStream("Enter new company name or press 'enter': ");
         if (isValidString(companyName))
             company.setName(companyName);
 
-        String companyCity = provideStringInputStream("Enter new company city or press 'enter' to return to menu: ");
+        String companyCity = provideStringInputStream("Enter new company city or press 'enter': ");
         if (isValidString(companyCity))
             company.setCity(companyCity);
 

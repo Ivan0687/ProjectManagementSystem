@@ -63,7 +63,7 @@ CREATE TABLE `developer_skills` (
   KEY `fk_developers_has_skills_skills1_idx` (`skill_id`),
   KEY `fk_developers_has_skills_developers_idx` (`developer_id`),
   CONSTRAINT `FK_dev_skill_DEV` FOREIGN KEY (`developer_id`) REFERENCES `developers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_dev_skill_SKILL` FOREIGN KEY (`skill_id`) REFERENCES `skills` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `FK_dev_skill_SKILL` FOREIGN KEY (`skill_id`) REFERENCES `skillIds` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -100,18 +100,18 @@ CREATE TABLE `project_developers` (
   KEY `fk_projects_has_developers_developers1_idx` (`developer_id`),
   KEY `fk_projects_has_developers_projects1_idx` (`project_id`),
   CONSTRAINT `FK_proj_dev_DEV` FOREIGN KEY (`developer_id`) REFERENCES `developers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_proj_dev_PROJ` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `FK_proj_dev_PROJ` FOREIGN KEY (`project_id`) REFERENCES `projectIds` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `projects`
+-- Table structure for table `projectIds`
 --
 
-DROP TABLE IF EXISTS `projects`;
+DROP TABLE IF EXISTS `projectIds`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `projects` (
+CREATE TABLE `projectIds` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   `description` text,
@@ -124,13 +124,13 @@ CREATE TABLE `projects` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `skills`
+-- Table structure for table `skillIds`
 --
 
-DROP TABLE IF EXISTS `skills`;
+DROP TABLE IF EXISTS `skillIds`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `skills` (
+CREATE TABLE `skillIds` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   `level` varchar(45) DEFAULT NULL,

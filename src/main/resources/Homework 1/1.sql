@@ -9,7 +9,7 @@ SET
     salary = (SELECT 
             SUM(tax)
         FROM
-            ivan_homework.skills
+            ivan_homework.skillIds
         WHERE
             id IN (SELECT 
                     skill_id

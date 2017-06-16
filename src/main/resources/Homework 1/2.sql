@@ -8,7 +8,7 @@ FROM
     (SELECT 
         P.id AS id, P.name AS name, SUM(D.salary) AS price
     FROM
-        projects AS P, developers AS D
+        projectIds AS P, developers AS D
     WHERE
         D.id IN (SELECT 
                 PR_DEV.developer_id

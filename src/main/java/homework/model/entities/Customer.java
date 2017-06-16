@@ -1,5 +1,6 @@
 package homework.model.entities;
 
+
 public class Customer {
 
     private int id;
@@ -28,5 +29,14 @@ public class Customer {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", city='" + city + '\'' +
+                '}';
     }
 }

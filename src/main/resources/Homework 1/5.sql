@@ -7,7 +7,7 @@ FROM
         C.id customer, SUM(salary) c_pays_co, CO.id company
     FROM
         customers C
-    JOIN projects P ON P.customer_id = C.id
+    JOIN projectIds P ON P.customer_id = C.id
     JOIN project_developers P_D ON P_D.project_id = P.id
     JOIN developers D ON D.id = P_D.developer_id
     JOIN companies CO ON CO.id = D.company_id

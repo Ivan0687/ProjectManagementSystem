@@ -1,16 +1,17 @@
 package homework.model.dao;
 
+import java.io.Serializable;
 import java.util.Collection;
 
-public interface DAO<T> extends CRUD<T> {
+public interface DAO<K extends Serializable, T>{
 
-    void create(T obj);
+    void create(T entity);
 
-    T read(int id);
+    T read(K key);
 
     Collection<T> read();
 
-    void update(int id, T obj);
+    void update(K key, T entity);
 
-    void delete(int id);
+    void delete(K key);
 }
