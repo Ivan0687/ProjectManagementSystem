@@ -1,19 +1,22 @@
 package homework.model.entities;
 
 
-public class Customer {
+import javax.persistence.*;
+import java.util.List;
 
-    private int id;
+@Entity
+@Table(name = "customers")
+public class Customer extends Model {
+
+    @Column
     private String name;
+
+    @Column
     private String city;
 
-    public int getId() {
-        return id;
-    }
+    @OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.REFRESH, mappedBy = "projectCustomer")
+    private List<Project> customerProjects;
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -31,10 +34,18 @@ public class Customer {
         this.city = city;
     }
 
+    public List<Project> getCustomerProjects() {
+        return customerProjects;
+    }
+
+    public void setCustomerProjects(List<Project> customerProjects) {
+        this.customerProjects = customerProjects;
+    }
+
     @Override
     public String toString() {
         return "Customer{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", name='" + name + '\'' +
                 ", city='" + city + '\'' +
                 '}';

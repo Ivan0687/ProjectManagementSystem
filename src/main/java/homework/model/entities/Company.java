@@ -1,21 +1,21 @@
 package homework.model.entities;
 
+import javax.persistence.*;
 import java.util.List;
 
-public class Company {
+@Entity
+@Table(name = "companies")
+public class Company extends Model {
 
-    private int id;
+        @Column
     private String name;
+
+    @Column
     private String city;
-    List<Developer> developers;
 
-    public int getId() {
-        return id;
-    }
+    @OneToMany (orphanRemoval = true, fetch = FetchType.EAGER, cascade = CascadeType.REFRESH, mappedBy = "developerCompany")
+    private List<Developer> companyDevelopers;
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -33,21 +33,21 @@ public class Company {
         this.city = city;
     }
 
-    public List<Developer> getDevelopers() {
-        return developers;
+    public List<Developer> getCompanyDevelopers() {
+        return companyDevelopers;
     }
 
-    public void setDevelopers(List<Developer> developers) {
-        this.developers = developers;
+    public void setCompanyDevelopers(List<Developer> developers) {
+        this.companyDevelopers = developers;
     }
 
     @Override
     public String toString() {
         return "Company{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", name='" + name + '\'' +
                 ", city='" + city + '\'' +
-                ", developers count=" + developers.size() +
+                ", developers count=" + companyDevelopers.size() +
                 '}';
     }
 }

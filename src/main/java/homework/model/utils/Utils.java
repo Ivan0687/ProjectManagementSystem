@@ -1,13 +1,13 @@
-package homework.model;
+package homework.model.utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 
 public class Utils {
+
+    private Utils() {
+    }
 
     public static void printBorder() {
         System.out.println("-------------------------------------------------------");
@@ -17,7 +17,6 @@ public class Utils {
     public static Integer provideIntInputStream() {
         return provideIntInputStreamWithMessage("Select choice (confirm Enter): ");
     }
-
 
     public static Integer provideIntInputStreamWithMessage(String message) {
         System.out.print(message);

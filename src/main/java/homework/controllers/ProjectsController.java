@@ -1,11 +1,11 @@
 package homework.controllers;
 
-import homework.model.dao.ProjectDAO;
+import homework.dao.basicDao.ProjectDAO;
 import homework.model.entities.Project;
-import homework.mySqlDaoImpl.ProjectDAOImpl;
+import homework.dao.mySqlDaoImpl.ProjectDAOImpl;
 
-import static homework.model.Utils.*;
-import static homework.model.Utils.provideIntInputStreamWithMessage;
+import static homework.model.utils.Utils.*;
+import static homework.model.utils.Utils.provideIntInputStreamWithMessage;
 
 public class ProjectsController {
 

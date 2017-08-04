@@ -1,8 +1,7 @@
-package homework.mySqlDaoImpl;
+package homework.dao.mySqlDaoImpl;
 
-import homework.model.dao.CustomerDAO;
+import homework.dao.basicDao.CustomerDAO;
 import homework.model.entities.Customer;
-import homework.model.entities.Project;
 
 import java.sql.*;
 import java.util.ArrayList;

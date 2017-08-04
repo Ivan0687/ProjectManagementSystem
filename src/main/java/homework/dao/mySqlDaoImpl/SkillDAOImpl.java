@@ -1,7 +1,7 @@
-package homework.mySqlDaoImpl;
+package homework.dao.mySqlDaoImpl;
 
 import homework.model.entities.Skill;
-import homework.model.dao.SkillDAO;
+import homework.dao.basicDao.SkillDAO;
 
 import java.sql.*;
 import java.util.ArrayList;

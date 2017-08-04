@@ -1,21 +1,32 @@
 package homework.model.entities;
 
-public class Project {
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
-    private int id;
+@Entity
+@Table(name = "projects")
+public class Project extends Model {
+
+    @Column
     private String name;
+
+    @Column
     private String description;
+
+    //jdbc
     private int customerId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id")
+    private Customer projectCustomer;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH, mappedBy = "developerProjects")
+    private List<Developer> projectDevelopers;
+
+    @Column
     private int cost;
 
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -49,4 +60,31 @@ public class Project {
         this.cost = cost;
     }
 
+    public Customer getProjectCustomer() {
+        return projectCustomer;
+    }
+
+    public void setProjectCustomer(Customer projectCustomer) {
+        this.projectCustomer = projectCustomer;
+    }
+
+    public List<Developer> getProjectDevelopers() {
+        return projectDevelopers;
+    }
+
+    public void setProjectDevelopers(List<Developer> projectDevelopers) {
+        this.projectDevelopers = projectDevelopers;
+    }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id=" + getId() +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", projectCustomer=" + projectCustomer.getName() +
+                ", projectDevelopers count =" + projectDevelopers.size() +
+                ", cost=" + cost +
+                '}';
+    }
 }

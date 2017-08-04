@@ -1,6 +1,6 @@
-package homework.mySqlDaoImpl;
+package homework.dao.mySqlDaoImpl;
 
-import homework.model.dao.ProjectDAO;
+import homework.dao.basicDao.ProjectDAO;
 import homework.model.entities.Customer;
 import homework.model.entities.Developer;
 import homework.model.entities.Project;
@@ -50,15 +50,11 @@ public class ProjectDAOImpl implements ProjectDAO<Integer, Project> {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
-
         }
-
     }
 
     @Override
     public Project read(Integer id) {
-
-
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(readProjectSQL)) {
 
@@ -77,17 +73,13 @@ public class ProjectDAOImpl implements ProjectDAO<Integer, Project> {
                 } else
                     return null;
             }
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
-
         }
-
     }
 
     @Override
     public Collection<Project> read() {
-
 
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(readProjectsSQL)) {
@@ -96,9 +88,7 @@ public class ProjectDAOImpl implements ProjectDAO<Integer, Project> {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
-
         }
-
     }
 
     @Override
@@ -124,6 +114,7 @@ public class ProjectDAOImpl implements ProjectDAO<Integer, Project> {
     @Override
     public void delete(Integer id) {
         try (Connection connection = getConnection()) {
+
             try (PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM projects WHERE id = ?")) {
 
                 preparedStatement.setInt(1, id);
@@ -142,7 +133,6 @@ public class ProjectDAOImpl implements ProjectDAO<Integer, Project> {
         }
     }
 
-    @Override
     public Collection<Project> findCustomerProjects(Customer customer) {
 
         try (Connection connection = getConnection()) {
@@ -176,7 +166,6 @@ public class ProjectDAOImpl implements ProjectDAO<Integer, Project> {
         }
     }
 
-    @Override
     public Collection<Project> findDeveloperProjects(Developer developer) {
 
         try (Connection connection = getConnection()) {

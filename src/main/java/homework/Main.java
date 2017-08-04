@@ -2,8 +2,8 @@ package homework;
 
 import homework.controllers.*;
 
-import static homework.model.Utils.printBorder;
-import static homework.model.Utils.provideIntInputStream;
+import static homework.model.utils.Utils.printBorder;
+import static homework.model.utils.Utils.provideIntInputStream;
 
 public class Main {
 

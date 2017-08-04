@@ -1,9 +1,11 @@
-package homework.model.dao;
+package homework.dao.basicDao;
+
+import homework.model.entities.Model;
 
 import java.io.Serializable;
 import java.util.Collection;
 
-public interface DAO<K extends Serializable, T>{
+public interface DAO<K extends Serializable, T extends Model>{
 
     void create(T entity);
 

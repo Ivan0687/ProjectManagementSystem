@@ -1,11 +1,11 @@
 package homework.controllers;
 
-import homework.model.dao.CompanyDAO;
+import homework.dao.basicDao.CompanyDAO;
 import homework.model.entities.Company;
-import homework.mySqlDaoImpl.CompanyDAOImpl;
+import homework.dao.mySqlDaoImpl.CompanyDAOImpl;
 
-import static homework.model.Utils.*;
-import static homework.model.Utils.provideIntInputStreamWithMessage;
+import static homework.model.utils.Utils.*;
+import static homework.model.utils.Utils.provideIntInputStreamWithMessage;
 
 public class CompaniesController {
 

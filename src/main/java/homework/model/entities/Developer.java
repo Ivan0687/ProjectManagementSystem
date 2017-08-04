@@ -1,24 +1,48 @@
 package homework.model.entities;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
-public class Developer {
+@Entity
+@Table(name = "developers")
+public class Developer extends Model {
 
-    private int id;
+    @Column
     private String name;
+
+    @Column
     private String surname;
-    private int companyId;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "company_id")
+    private Company developerCompany;
+
+    @Column
     private int salary;
-    List<Integer> skillIds;
-    List<Integer> projectIds;
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+     // line for jdbc
+    private int companyId;
+    /*
+    // line for jdbc
+    private List<Integer> skillIds;
+    // line for jdbc
+    private List<Integer> projectIds;
+    */
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+    @JoinTable(name = "developer_skills",
+            joinColumns = @JoinColumn(name = "developer_id"),
+            inverseJoinColumns = @JoinColumn(name = "skill_id"))
+    private List<Skill> developerSkills;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+    @JoinTable(name = "project_developers",
+            joinColumns = @JoinColumn(name = "developer_id"),
+            inverseJoinColumns = @JoinColumn(name = "project_id"))
+    private List<Project> developerProjects;
+
 
     public String getName() {
         return name;
@@ -36,14 +60,6 @@ public class Developer {
         this.surname = surname;
     }
 
-    public int getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(int companyId) {
-        this.companyId = companyId;
-    }
-
     public int getSalary() {
         return salary;
     }
@@ -52,6 +68,17 @@ public class Developer {
         this.salary = salary;
     }
 
+
+    //jdbc
+    public int getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
+    }
+
+/*
     public List<Integer> getSkillIds() {
         return skillIds;
     }
@@ -67,17 +94,43 @@ public class Developer {
     public void setProjectIds(List<Integer> projectIds) {
         this.projectIds = projectIds;
     }
+    */
+
+    //hibernate
+    public Company getDeveloperCompany() {
+        return developerCompany;
+    }
+
+    public void setDeveloperCompany(Company company) {
+        this.developerCompany = company;
+    }
+
+    public List<Skill> getDeveloperSkills() {
+        return developerSkills;
+    }
+
+    public void setDeveloperSkills(List<Skill> developerSkills) {
+        this.developerSkills = developerSkills;
+    }
+
+    public List<Project> getDeveloperProjects() {
+        return developerProjects;
+    }
+
+    public void setDeveloperProjects(List<Project> developerProjects) {
+        this.developerProjects = developerProjects;
+    }
 
     @Override
     public String toString() {
         return "Developer{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", companyId=" + companyId +
+                ", company=" + developerCompany.getId() +
                 ", salary=" + salary +
-                ", skillIds count=" + skillIds.size() +
-                ", projectIds count=" + projectIds.size() +
+                ", skills count=" + developerSkills.size() +
+                ", projects count=" + developerProjects.size() +
                 '}';
     }
 }

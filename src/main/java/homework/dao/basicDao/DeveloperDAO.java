@@ -1,4 +1,4 @@
-package homework.model.dao;
+package homework.dao.basicDao;
 
 import homework.model.entities.Developer;
 

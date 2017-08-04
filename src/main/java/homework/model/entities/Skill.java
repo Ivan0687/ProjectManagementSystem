@@ -1,19 +1,25 @@
 package homework.model.entities;
 
-public class Skill {
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
-    private int id;
+@Entity
+@Table(name = "skills")
+public class Skill extends Model {
+
+    @Column
     private String name;
+
+    @Column
     private String level;
+
+    @Column
     private int tax;
 
-    public int getId() {
-        return id;
-    }
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "developerSkills")
+    private List<Developer> developers;
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -39,10 +45,18 @@ public class Skill {
         this.tax = tax;
     }
 
+    public List<Developer> getDevelopers() {
+        return developers;
+    }
+
+    public void setDevelopers(List<Developer> developers) {
+        this.developers = developers;
+    }
+
     @Override
     public String toString() {
         return "Skill{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", name='" + name + '\'' +
                 ", level='" + level + '\'' +
                 ", tax=" + tax +

@@ -1,13 +1,13 @@
 package homework.controllers;
 
-import homework.model.dao.DeveloperDAO;
-import homework.model.dao.SkillDAO;
+import homework.dao.basicDao.DeveloperDAO;
+import homework.dao.basicDao.SkillDAO;
 import homework.model.entities.Developer;
 import homework.model.entities.Skill;
-import homework.mySqlDaoImpl.DeveloperDAOImpl;
-import homework.mySqlDaoImpl.SkillDAOImpl;
+import homework.dao.mySqlDaoImpl.DeveloperDAOImpl;
+import homework.dao.mySqlDaoImpl.SkillDAOImpl;
 
-import static homework.model.Utils.*;
+import static homework.model.utils.Utils.*;
 
 public class DevelopersController {
 

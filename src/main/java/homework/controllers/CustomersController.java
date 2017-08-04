@@ -1,10 +1,10 @@
 package homework.controllers;
 
-import homework.model.dao.CustomerDAO;
+import homework.dao.basicDao.CustomerDAO;
 import homework.model.entities.Customer;
-import homework.mySqlDaoImpl.CustomerDAOImpl;
+import homework.dao.mySqlDaoImpl.CustomerDAOImpl;
 
-import static homework.model.Utils.*;
+import static homework.model.utils.Utils.*;
 
 public class CustomersController {
 

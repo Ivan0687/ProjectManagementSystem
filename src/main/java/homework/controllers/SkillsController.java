@@ -1,14 +1,17 @@
 package homework.controllers;
 
-import homework.model.dao.SkillDAO;
+import homework.dao.basicDao.DAO;
+import homework.dao.basicDao.SkillDAO;
+import homework.dao.hibernateDaoImpl.HibernateSkillDaoImpl;
 import homework.model.entities.Skill;
-import homework.mySqlDaoImpl.SkillDAOImpl;
+import homework.dao.mySqlDaoImpl.SkillDAOImpl;
 
-import static homework.model.Utils.*;
+import static homework.model.utils.Utils.*;
 
 public class SkillsController {
 
-    private SkillDAO<Integer, Skill> skillDAO = new SkillDAOImpl();
+   // private SkillDAO<Integer, Skill> skillDAO = new SkillDAOImpl();
+    private DAO<Integer, Skill> skillDAO = new HibernateSkillDaoImpl();
 
     public void showMenu() {
 

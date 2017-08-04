@@ -1,6 +1,6 @@
-package homework.mySqlDaoImpl;
+package homework.dao.mySqlDaoImpl;
 
-import homework.model.dao.DeveloperDAO;
+import homework.dao.basicDao.DeveloperDAO;
 import homework.model.entities.Developer;
 
 import java.sql.*;
